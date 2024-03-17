@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+    <h1>Leaves History</h1>
+        <button class="btn btn-primary" (click)="openModal(template)">+Apply</button>
+    </div>
+
+    <div *ngIf="leaves.length == 0" class="text-center text-warning rounded-circle p-5">
+        <h1>Oops!</h1>
+        <h1><i class="bi bi-exclamation-circle dis"></i></h1>
+        <h1>Nothing To Display</h1>
+    </div>
+    <div *ngIf="leaves.length > 0">
+        <table class="table table-strip">
+            <thead>
+                <tr>
+                    <th>Leave ID</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>Status Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let leave of leaves">
+                    <td>{{leave.id}}</td>
+                    <td>{{leave.startDate}}</td>
+                    <td>{{leave.endDate}}</td>
+                    <td>{{leave.remarks}}</td>
+                    <td>{{leave.status}}</td>
+                    <td>{{leave.statusRemarks}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Apply Leave</h4>    
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="cancel()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" [formGroup]="leaveForm">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="id">
+            <label for="floatingInput">ID</label>
+            <p class="text-danger" *ngIf="leaveForm.controls['id']['touched'] && leaveForm.controls['id']['errors']">*Required Field</p>
+            
+          </div>
+        <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="startDate">
+            <label for="floatingInput">Leave Start Date</label>
+            <p class="text-danger" *ngIf="leaveForm.controls['startDate']['touched'] && leaveForm.controls['startDate']['errors']">*Required Field</p>
+
+          </div>
+        <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="endDate">
+            <label for="floatingInput">Leave End Date</label>
+            <p class="text-danger" *ngIf="leaveForm.controls['endDate']['touched'] && leaveForm.controls['endDate']['errors']">*Required Field</p>
+          </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="remarks">
+            <label for="floatingInput">Remarks/Reason</label>
+            <p class="text-danger" *ngIf="leaveForm.controls['remarks']['touched'] && leaveForm.controls['remarks']['errors']">*Required Field</p>
+          </div>
+          
+    </div>
+    <div class="model-footer d-flex justify-content-end align-items-center mb-3 me-3">
+        <button class="btn btn-primary me-1" (click)="apply()" [disabled]="!leaveForm.valid">Apply</button>  
+        <button class="btn btn-danger" (click)="cancel()">Cancel</button>
+    </div>
+  </ng-template>

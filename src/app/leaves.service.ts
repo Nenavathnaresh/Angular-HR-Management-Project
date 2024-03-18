@@ -28,4 +28,12 @@ leaveApi = 'http://localhost:3000/leaves';
   addleave(lev:any){
     return this.http.post(this.leaveApi,lev); 
   }
+
+  getAllLeaves(){
+    return this.http.get(this.leaveApi);
+  }
+
+  updateLeave(id:any, leave:any){
+    return this.http.put(`${this.leaveApi}/${id}`, leave);
+  }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -8,11 +8,24 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AdminDashboardComponent {
 
-  constructor(public aR:ActivatedRoute){}
+  admin:any;
+  constructor(public aR: ActivatedRoute, public router: Router) { }
 
-  ngOnInit(){
-    this.aR.queryParams.subscribe((res)=>{
-      console.log(res); 
+  ngOnInit() {
+    this.aR.queryParams.subscribe((res) => {
+      console.log(res);
+      this.admin = res;
     })
+  }
+
+  empleaves() {
+    this.router.navigate(['admindashboard/adminleaves'])
+  }
+
+  logout() {
+    let logoutConfirm = window.confirm('Are you sure want to logout')
+    if (logoutConfirm) {
+      this.router.navigate(['/login']);
+    }
   }
 }

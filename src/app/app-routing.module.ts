@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { EmpDashboardComponent } from './emp-dashboard/emp-dashboard.component';
 import { EmpLeavesComponent } from './emp-leaves/emp-leaves.component';
+import { AdminLeavesComponent } from './admin-leaves/admin-leaves.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,13 @@ const routes: Routes = [
   },
   {
     path: "admindashboard",
-    component: AdminDashboardComponent
+    component: AdminDashboardComponent,
+    children:[
+      {
+        path:"adminleaves",
+        component:AdminLeavesComponent,
+      }
+    ]
   },
   {
     path: "empdashboard",

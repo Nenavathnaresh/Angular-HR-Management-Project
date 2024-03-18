@@ -22,4 +22,11 @@ export class EmpDashboardComponent {
     // alert('hii')
     this.router.navigate(['empdashboard/empleaves'],{queryParams:this.currEmp})
   }
+
+  logout(){
+    let logoutConfirm = window.confirm('Are you sure want to logout')
+    if(logoutConfirm){
+    this.router.navigate(['/login']);
+    }
+  }
 }
